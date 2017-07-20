@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div class="wrap">
+			<v-header></v-header>
+			<div class="select">
+				<v-hospital v-for="x in data" :x="x"></v-hospital>
+			</div>
+			<v-footer></v-footer>
+		</div>
+	</body>
+	<script src="./lib/vue.min.js"></script>
+	<script src="./lib/vuex.min.js"></script>
+	<script src="./lib/axios.js"></script>
+	<script src="store/store.js"></script>
+	<script src="componets/header.js"></script>
+	<script src="componets/main.js"></script>
+	<script src="componets/footer.js"></script>
+	<script src="js/app.js"></script>
+</html>

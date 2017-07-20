@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="box">
+			<button @click="change">add</button>
+			<h1>{{count()}}</h1>
+		</div>
+	</body>
+	<script src="../lib/vue.min.js"></script>
+	<script src="../lib/vuex.min.js"></script>
+	<script>
+		//Vuex数据显示用computed定义数据变化函数或者在methods方法里面直接写函数使用
+		//声明Vuex，数据
+		const store = new Vuex.Store({
+			//数据存放对象
+			state:{
+				count:0,
+				arr:[1,2,3,4,5,6,7,8,9]
+			},
+			getters:{
+				odd(state){
+					let arrs= []
+					state.arr.forEach((i)=>{
+						if(i%2==0){
+							arrs.push(i)
+						}
+					})
+					console.log(arrs)
+					return arrs
+				}
+			},
+			//同步数据处理的方法集合，用commit()方法调用
+			mutations:{
+				increment:function(state,num){
+					state.count+=num
+					console.log(state)
+				}
+			},
+			//异步数据处理的方法的集合，异步可以调用同步的数据调用，用dispath()调用
+			actions:{
+				increment(context,num){
+					context.commit("increment",num)
+				},
+				mixus(context){
+//					context.state.count++
+					console.log(context)
+				}
+			}
+		})
+		new Vue({
+			el:".box",
+			//Vuex在vue上挂载
+			store:store,
+			data:{
+//				count:0
+			},
+//			computed:{
+//				count(){
+//					return store.state.count
+//				}
+//			},
+			methods:{
+				change(){
+					console.log(store)
+					console.log(store.state.count)
+//					store.commit("increment")
+//					setTimeout(()=>{
+//						store.dispatch("increment",20)
+//					},1000)
+//					store.getters.odd
+					store.dispatch("mixus")
+				},
+				count(){
+					return store.state.count
+				}
+			}
+		})
+	</script>
+</html>
